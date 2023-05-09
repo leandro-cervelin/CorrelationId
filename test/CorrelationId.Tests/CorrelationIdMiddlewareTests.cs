@@ -472,7 +472,7 @@ public class CorrelationIdMiddlewareTests
 
         var body = await response.Content.ReadAsStringAsync();
 
-        Assert.Equal(body, customHeader);
+        Assert.Equal(customHeader, body);
     }
 
     [Fact]

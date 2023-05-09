@@ -26,7 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{5961B376
 		azure-pipelines.yml = azure-pipelines.yml
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6.0", "6.0", "{E28C5481-A68F-44AF-983F-EA127E70621A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7.0", "7.0", "{E28C5481-A68F-44AF-983F-EA127E70621A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcSampleTests", "samples\6.0\MvcSampleTests\MvcSampleTests.csproj", "{0E2E2678-4DBB-4560-AF0E-86ECAF8D9B6F}"
 EndProject
