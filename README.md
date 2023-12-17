@@ -11,7 +11,7 @@ Optionally, this correlation ID can be attached to downstream HTTP calls made vi
 [Change history and release notes](https://stevejgordon.github.io/CorrelationId/releasenotes).
 
 ## Supported Runtimes
-- .NET Standard 2.0+
+- .NET 8.0
 
 | Package | NuGet Stable | NuGet Pre-release | Downloads | Travis CI | Azure Pipelines |
 | ------- | ------------ | ----------------- | --------- | --------- | ----------------|
@@ -65,15 +65,9 @@ public class TransientClass
 }
 ```
 
-See the [sample app](https://github.com/stevejgordon/CorrelationId/tree/master/samples/3.1/MvcSample) for example usage.
+See the [sample app](https://github.com/leandro-cervelin/CorrelationId/tree/master/samples/MvcSample) for example usage.
 
 Full documentation can be found in the [wiki](https://github.com/stevejgordon/CorrelationId/wiki).
-
-## Known Issue with ASP.NET Core 2.2.0
-
-It appears that a [regression in the code for ASP.NET Core 2.2.0](https://github.com/aspnet/AspNetCore/issues/5144) means that setting the TraceIdentifier on the context via middleware results in the context becoming null when accessed further down in the pipeline. A fix is was released in 2.2.2.
-
-A workaround at this time is to disable the behaviour of updating the TraceIdentifier using the options when adding the middleware.
 
 ## Support
 
