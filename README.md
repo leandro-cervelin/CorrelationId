@@ -19,7 +19,12 @@ Optionally, this correlation ID can be attached to downstream HTTP calls made vi
 
 ## Installation
 
-You should install [CorrelationId from NuGet](https://www.nuget.org/packages/CorrelationId/):
+You should install [CorrelationId-ForkWithLogLevelSeverityOption from NuGet](https://www.nuget.org/packages/CorrelationId-ForkWithLogLevelSeverityOption):
+```ps
+Install-Package CorrelationId-ForkWithLogLevelSeverityOption
+```
+
+The original package: [CorrelationId from NuGet](https://www.nuget.org/packages/CorrelationId/):
 
 ```ps
 Install-Package CorrelationId
@@ -36,7 +41,23 @@ All stable and some pre-release packages are available on NuGet.
 Inside `ConfigureServices` add the required correlation ID services, with common defaults.
 
 ```csharp
-services.AddDefaultCorrelationId
+builder.Services.AddDefaultCorrelationId(options =>
+{
+    options.CorrelationIdGenerator = () => "Foo";
+    options.AddToLoggingScope = true;
+    options.EnforceHeader = false; //set true to enforce the correlation ID
+    options.IgnoreRequestHeader = false;
+    options.IncludeInResponse = true;
+    options.RequestHeader = "My-Custom-Correlation-Id";
+    options.ResponseHeader = "X-Correlation-Id";
+    options.UpdateTraceIdentifier = false;
+    options.LogLevelOptions = new CorrelationIdLogLevelOptions
+    {
+        //set log level severity
+        FoundCorrelationIdHeader = LogLevel.Debug,
+        MissingCorrelationIdHeader = LogLevel.Debug
+    };
+});
 ```
 
 This registers a correlation ID provider which generates new IDs based on a random GUID.
@@ -65,9 +86,9 @@ public class TransientClass
 }
 ```
 
-See the [sample app](https://github.com/leandro-cervelin/CorrelationId/tree/master/samples/MvcSample) for example usage.
+See the [sample app](https://github.com/leandro-cervelin/CorrelationId/tree/main/samples/MvcSample) for example usage.
 
-Full documentation can be found in the [wiki](https://github.com/stevejgordon/CorrelationId/wiki).
+Full documentation can be found in the [wiki](https://github.com/leandro-cervelin/CorrelationId/wiki).
 
 ## Support
 
