@@ -11,7 +11,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\src\CorrelationId\CorrelationId.csproj" />
+		<ProjectReference Include="..\..\src\CorrelationId\CorrelationId.csproj" />
 	</ItemGroup>
 
 </Project>
