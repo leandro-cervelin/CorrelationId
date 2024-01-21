@@ -8,14 +8,10 @@ Optionally, this correlation ID can be attached to downstream HTTP calls made vi
 
 ## Release Notes
 
-[Change history and release notes](https://stevejgordon.github.io/CorrelationId/releasenotes).
+[Change history and release notes](https://github.com/leandro-cervelin/CorrelationId/blob/main/docs/releasenotes.md)).
 
 ## Supported Runtimes
 - .NET 8.0
-
-| Package | NuGet Stable | NuGet Pre-release | Downloads | Travis CI | Azure Pipelines |
-| ------- | ------------ | ----------------- | --------- | --------- | ----------------|
-| [CorrelationId](https://www.nuget.org/packages/CorrelationId/) | [![NuGet](https://img.shields.io/nuget/v/CorrelationId.svg)](https://www.nuget.org/packages/CorrelationId) | [![NuGet](https://img.shields.io/nuget/vpre/CorrelationId.svg)](https://www.nuget.org/packages/CorrelationId) | [![Nuget](https://img.shields.io/nuget/dt/CorrelationId.svg)](https://www.nuget.org/packages/CorrelationId) | [![Build Status](https://travis-ci.org/stevejgordon/CorrelationId.svg?branch=master)](https://travis-ci.org/stevejgordon/CorrelationId) | [![Build Status](https://dev.azure.com/stevejgordon/CorrelationId/_apis/build/status/stevejgordon.CorrelationId?branchName=master)](https://dev.azure.com/stevejgordon/CorrelationId/_build/latest?definitionId=1&branchName=master) |
 
 ## Installation
 
