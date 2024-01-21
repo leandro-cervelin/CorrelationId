@@ -15,7 +15,7 @@ public static class CorrelationIdExtensions
     /// <returns></returns>
     public static IApplicationBuilder UseCorrelationId(this IApplicationBuilder app)
     {
-        if (app == null) throw new ArgumentNullException(nameof(app));
+        ArgumentNullException.ThrowIfNull(app);
 
         if (app.ApplicationServices.GetService(typeof(ICorrelationContextFactory)) == null)
             throw new InvalidOperationException(

@@ -6,24 +6,18 @@ namespace CorrelationId.HttpClient;
 ///     A <see cref="DelegatingHandler" /> which adds the correlation ID header from the <see cref="CorrelationContext" />
 ///     onto outgoing HTTP requests.
 /// </summary>
-internal sealed class CorrelationIdHandler : DelegatingHandler
+internal sealed class CorrelationIdHandler(ICorrelationContextAccessor correlationContextAccessor) : DelegatingHandler
 {
-    private readonly ICorrelationContextAccessor _correlationContextAccessor;
-
-    public CorrelationIdHandler(ICorrelationContextAccessor correlationContextAccessor)
-    {
-        _correlationContextAccessor = correlationContextAccessor;
-    }
 
     /// <inheritdoc cref="DelegatingHandler" />
     protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
         CancellationToken cancellationToken)
     {
-        var correlationId = _correlationContextAccessor?.CorrelationContext?.CorrelationId;
+        var correlationId = correlationContextAccessor?.CorrelationContext?.CorrelationId;
         if (!string.IsNullOrEmpty(correlationId)
-            && !request.Headers.Contains(_correlationContextAccessor.CorrelationContext.Header))
-            request.Headers.Add(_correlationContextAccessor.CorrelationContext.Header,
-                _correlationContextAccessor.CorrelationContext.CorrelationId);
+            && !request.Headers.Contains(correlationContextAccessor.CorrelationContext.Header))
+            request.Headers.Add(correlationContextAccessor.CorrelationContext.Header,
+                correlationContextAccessor.CorrelationContext.CorrelationId);
 
         return base.SendAsync(request, cancellationToken);
     }

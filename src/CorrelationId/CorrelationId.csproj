@@ -6,26 +6,27 @@
 		<Authors>Steve Gordon</Authors>
 		<Company>Steve Gordon | www.stevejgordon.co.uk</Company>
 		<Product>CorrelationId Middleware for ASP.NET Core</Product>
-		<Description>ASP.NET Core correlation ID middleware for distributed microservices.</Description>
-		<Copyright>© Steve Gordon 2017-2020. All rights reserved.</Copyright>
+		<Description>This is a fork from https://github.com/stevejgordon/CorrelationId. ASP.NET Core correlation ID middleware for distributed microservices.</Description>
+		<Copyright>© Steve Gordon 2017-2024. All rights reserved.</Copyright>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>aspnetcore;correlationid</PackageTags>
 		<NeutralLanguage>en</NeutralLanguage>
-		<Version>5.0.0</Version>
+		<Version>5.0.1</Version>
 		<DocumentationFile></DocumentationFile>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageProjectUrl>https://github.com/stevejgordon/CorrelationId</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/stevejgordon/CorrelationId</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/leandro-cervelin/CorrelationId</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/leandro-cervelin/CorrelationId</RepositoryUrl>
 		<LangVersion>latest</LangVersion>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<PackageId>CorrelationId-ForkWithLogLevelSeverityOption</PackageId>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 		<PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Options" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Options" Version="8.0.1" />
 	</ItemGroup>
 
 </Project>

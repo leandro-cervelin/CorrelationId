@@ -3,13 +3,9 @@
 namespace CorrelationId.DependencyInjection;
 
 /// <inheritdoc />
-internal class CorrelationIdBuilder : ICorrelationIdBuilder
+internal class CorrelationIdBuilder(IServiceCollection services) : ICorrelationIdBuilder
 {
-    public CorrelationIdBuilder(IServiceCollection services)
-    {
-        Services = services;
-    }
 
     /// <inheritdoc />
-    public IServiceCollection Services { get; }
+    public IServiceCollection Services { get; } = services;
 }

@@ -2,6 +2,12 @@
 
 Packages are available on NuGet: [CorrelationId](https://www.nuget.org/packages/CorrelationId/).
 
+## v5.0.*
+
+### .NET 8 Upgrade
+
+* All components are fully upgraded to .NET 8.0, including the sample.
+
 ## v4.0.0
 
 ### .NET 6 Upgrade

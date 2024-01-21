@@ -24,7 +24,7 @@ public static class CorrelationIdServiceCollectionExtensions
     /// </returns>
     public static ICorrelationIdBuilder AddCorrelationId(this IServiceCollection services)
     {
-        if (services is null) throw new ArgumentNullException(nameof(services));
+        ArgumentNullException.ThrowIfNull(services);
 
         services.TryAddSingleton<ICorrelationContextAccessor, CorrelationContextAccessor>();
         services.TryAddTransient<ICorrelationContextFactory, CorrelationContextFactory>();
@@ -49,7 +49,7 @@ public static class CorrelationIdServiceCollectionExtensions
     public static ICorrelationIdBuilder AddCorrelationId<T>(this IServiceCollection services)
         where T : class, ICorrelationIdProvider
     {
-        if (services is null) throw new ArgumentNullException(nameof(services));
+        ArgumentNullException.ThrowIfNull(services);
 
         if (services.Any(x => x.ServiceType == typeof(ICorrelationIdProvider)))
             throw new InvalidOperationException("A provider has already been added.");
@@ -81,9 +81,9 @@ public static class CorrelationIdServiceCollectionExtensions
     public static ICorrelationIdBuilder AddCorrelationId(this IServiceCollection services,
         Action<CorrelationIdOptions> configure)
     {
-        if (services is null) throw new ArgumentNullException(nameof(services));
+        ArgumentNullException.ThrowIfNull(services);
 
-        if (configure is null) throw new ArgumentNullException(nameof(configure));
+        ArgumentNullException.ThrowIfNull(configure);
 
         services.Configure(configure);
 
@@ -111,12 +111,12 @@ public static class CorrelationIdServiceCollectionExtensions
     public static ICorrelationIdBuilder AddCorrelationId<T>(this IServiceCollection services,
         Action<CorrelationIdOptions> configure) where T : class, ICorrelationIdProvider
     {
-        if (services is null) throw new ArgumentNullException(nameof(services));
+        ArgumentNullException.ThrowIfNull(services);
 
         if (services.Any(x => x.ServiceType == typeof(ICorrelationIdProvider)))
             throw new InvalidOperationException("A provider has already been added.");
 
-        if (configure is null) throw new ArgumentNullException(nameof(configure));
+        ArgumentNullException.ThrowIfNull(configure);
 
         services.Configure(configure);
 
@@ -136,7 +136,7 @@ public static class CorrelationIdServiceCollectionExtensions
     /// <returns>A reference to this instance after the operation has completed.</returns>
     public static IServiceCollection AddDefaultCorrelationId(this IServiceCollection services)
     {
-        if (services is null) throw new ArgumentNullException(nameof(services));
+        ArgumentNullException.ThrowIfNull(services);
 
         services.AddCorrelationId().WithGuidProvider();
 
@@ -161,9 +161,9 @@ public static class CorrelationIdServiceCollectionExtensions
     public static IServiceCollection AddDefaultCorrelationId(this IServiceCollection services,
         Action<CorrelationIdOptions> configure)
     {
-        if (services is null) throw new ArgumentNullException(nameof(services));
+        ArgumentNullException.ThrowIfNull(services);
 
-        if (configure is null) throw new ArgumentNullException(nameof(configure));
+        ArgumentNullException.ThrowIfNull(configure);
 
         services.AddDefaultCorrelationId();
 

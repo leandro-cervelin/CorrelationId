@@ -10,28 +10,19 @@ namespace CorrelationId;
 ///     Middleware which attempts to reads / creates a Correlation ID that can then be used in logs and
 ///     passed to upstream requests.
 /// </summary>
-public class CorrelationIdMiddleware
+/// <remarks>
+///     Creates a new instance of the CorrelationIdMiddleware.
+/// </remarks>
+/// <param name="next">The next middleware in the pipeline.</param>
+/// <param name="logger">The <see cref="ILogger" /> instance to log to.</param>
+/// <param name="options">The configuration options.</param>
+/// <param name="correlationIdProvider"></param>
+public class CorrelationIdMiddleware(RequestDelegate next, ILogger<CorrelationIdMiddleware> logger,
+    IOptions<CorrelationIdOptions> options, ICorrelationIdProvider correlationIdProvider = null)
 {
-    private readonly ICorrelationIdProvider _correlationIdProvider;
-    private readonly ILogger _logger;
-    private readonly RequestDelegate _next;
-    private readonly CorrelationIdOptions _options;
-
-    /// <summary>
-    ///     Creates a new instance of the CorrelationIdMiddleware.
-    /// </summary>
-    /// <param name="next">The next middleware in the pipeline.</param>
-    /// <param name="logger">The <see cref="ILogger" /> instance to log to.</param>
-    /// <param name="options">The configuration options.</param>
-    /// <param name="correlationIdProvider"></param>
-    public CorrelationIdMiddleware(RequestDelegate next, ILogger<CorrelationIdMiddleware> logger,
-        IOptions<CorrelationIdOptions> options, ICorrelationIdProvider correlationIdProvider = null)
-    {
-        _next = next ?? throw new ArgumentNullException(nameof(next));
-        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        _correlationIdProvider = correlationIdProvider;
-        _options = options.Value ?? throw new ArgumentNullException(nameof(options));
-    }
+    private readonly ILogger _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+    private readonly RequestDelegate _next = next ?? throw new ArgumentNullException(nameof(next));
+    private readonly CorrelationIdOptions _options = options.Value ?? throw new ArgumentNullException(nameof(options));
 
     /// <summary>
     ///     Processes a request to synchronise TraceIdentifier and Correlation ID headers. Also creates a
@@ -46,7 +37,7 @@ public class CorrelationIdMiddleware
     {
         Log.CorrelationIdProcessingBegin(_logger);
 
-        if (_correlationIdProvider is null)
+        if (correlationIdProvider is null)
         {
             Log.MissingCorrelationIdProvider(_logger);
 
@@ -96,7 +87,7 @@ public class CorrelationIdMiddleware
                 if (httpContext.Response.Headers.ContainsKey(_options.ResponseHeader))
                     return Task.CompletedTask;
                 Log.WritingCorrelationIdResponseHeader(_logger, _options.ResponseHeader, correlationId);
-                httpContext.Response.Headers.Add(_options.ResponseHeader, correlationId);
+                httpContext.Response.Headers.Append(_options.ResponseHeader, correlationId);
 
                 return Task.CompletedTask;
             });
@@ -139,8 +130,8 @@ public class CorrelationIdMiddleware
             return correlationId;
         }
 
-        correlationId = _correlationIdProvider.GenerateCorrelationId();
-        Log.GeneratedHeaderUsingProvider(_logger, correlationId, _correlationIdProvider.GetType());
+        correlationId = correlationIdProvider.GenerateCorrelationId();
+        Log.GeneratedHeaderUsingProvider(_logger, correlationId, correlationIdProvider.GetType());
         return correlationId;
     }
 

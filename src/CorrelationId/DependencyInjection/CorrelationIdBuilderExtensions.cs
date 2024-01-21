@@ -22,7 +22,7 @@ public static class CorrelationIdBuilderExtensions
     /// <exception cref="ArgumentNullException">Thrown if the <paramref name="builder" /> parameter is null.</exception>
     public static ICorrelationIdBuilder ClearProvider(this ICorrelationIdBuilder builder)
     {
-        if (builder is null) throw new ArgumentNullException(nameof(builder));
+        ArgumentNullException.ThrowIfNull(builder);
 
         builder.Services.RemoveAll<ICorrelationIdProvider>();
 
@@ -41,7 +41,7 @@ public static class CorrelationIdBuilderExtensions
     /// </exception>
     public static ICorrelationIdBuilder WithGuidProvider(this ICorrelationIdBuilder builder)
     {
-        if (builder is null) throw new ArgumentNullException(nameof(builder));
+        ArgumentNullException.ThrowIfNull(builder);
 
         if (builder.Services.Any(x => x.ServiceType == typeof(ICorrelationIdProvider)))
             throw new InvalidOperationException(MultipleProviderExceptionMessage);
@@ -63,7 +63,7 @@ public static class CorrelationIdBuilderExtensions
     /// </exception>
     public static ICorrelationIdBuilder WithTraceIdentifierProvider(this ICorrelationIdBuilder builder)
     {
-        if (builder is null) throw new ArgumentNullException(nameof(builder));
+        ArgumentNullException.ThrowIfNull(builder);
 
         if (builder.Services.Any(x => x.ServiceType == typeof(ICorrelationIdProvider)))
             throw new InvalidOperationException("A provider has already been added.");
@@ -88,9 +88,9 @@ public static class CorrelationIdBuilderExtensions
     public static ICorrelationIdBuilder WithCustomProvider(this ICorrelationIdBuilder builder,
         ICorrelationIdProvider provider)
     {
-        if (builder is null) throw new ArgumentNullException(nameof(builder));
+        ArgumentNullException.ThrowIfNull(builder);
 
-        if (provider is null) throw new ArgumentNullException(nameof(provider));
+        ArgumentNullException.ThrowIfNull(provider);
 
         if (builder.Services.Any(x => x.ServiceType == typeof(ICorrelationIdProvider)))
             throw new InvalidOperationException("A provider has already been added.");
@@ -114,7 +114,7 @@ public static class CorrelationIdBuilderExtensions
     public static ICorrelationIdBuilder WithCustomProvider<T>(this ICorrelationIdBuilder builder)
         where T : class, ICorrelationIdProvider
     {
-        if (builder is null) throw new ArgumentNullException(nameof(builder));
+        ArgumentNullException.ThrowIfNull(builder);
 
         if (builder.Services.Any(x => x.ServiceType == typeof(ICorrelationIdProvider)))
             throw new InvalidOperationException("A provider has already been added.");

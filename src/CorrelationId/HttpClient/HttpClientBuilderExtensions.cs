@@ -18,7 +18,7 @@ public static class HttpClientBuilderExtensions
     /// <returns>A reference to this instance after the operation has completed.</returns>
     public static IHttpClientBuilder AddCorrelationIdForwarding(this IHttpClientBuilder builder)
     {
-        if (builder is null) throw new ArgumentNullException(nameof(builder));
+        ArgumentNullException.ThrowIfNull(builder);
 
         builder.Services.TryAddTransient<CorrelationIdHandler>();
         builder.AddHttpMessageHandler<CorrelationIdHandler>();

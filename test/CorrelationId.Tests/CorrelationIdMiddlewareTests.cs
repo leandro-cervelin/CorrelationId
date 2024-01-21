@@ -351,7 +351,7 @@ public class CorrelationIdMiddlewareTests
                     var data = Encoding.UTF8.GetBytes(singleton?.GetCorrelationFromScoped + "|" +
                                                       scoped?.GetCorrelationFromScoped);
 
-                    await rd.Response.Body.WriteAsync(data, 0, data.Length);
+                    await rd.Response.Body.WriteAsync(data);
                 });
             })
             .ConfigureServices(sc =>
@@ -407,7 +407,7 @@ public class CorrelationIdMiddlewareTests
                     var data = Encoding.UTF8.GetBytes(transient?.GetCorrelationFromScoped + "|" +
                                                       scoped?.GetCorrelationFromScoped);
 
-                    await rd.Response.Body.WriteAsync(data, 0, data.Length);
+                    await rd.Response.Body.WriteAsync(data);
                 });
             })
             .ConfigureServices(sc =>
@@ -618,40 +618,19 @@ public class CorrelationIdMiddlewareTests
         Assert.Equal(correlationId, traceIdentifier);
     }
 
-    private class SingletonClass
+    private class SingletonClass(ICorrelationContextAccessor correlationContext)
     {
-        private readonly ICorrelationContextAccessor _correlationContext;
-
-        public SingletonClass(ICorrelationContextAccessor correlationContext)
-        {
-            _correlationContext = correlationContext;
-        }
-
-        public string GetCorrelationFromScoped => _correlationContext.CorrelationContext.CorrelationId;
+        public string GetCorrelationFromScoped => correlationContext.CorrelationContext.CorrelationId;
     }
 
-    private class ScopedClass
+    private class ScopedClass(ICorrelationContextAccessor correlationContext)
     {
-        private readonly ICorrelationContextAccessor _correlationContext;
-
-        public ScopedClass(ICorrelationContextAccessor correlationContext)
-        {
-            _correlationContext = correlationContext;
-        }
-
-        public string GetCorrelationFromScoped => _correlationContext.CorrelationContext.CorrelationId;
+        public string GetCorrelationFromScoped => correlationContext.CorrelationContext.CorrelationId;
     }
 
-    private class TransientClass
+    private class TransientClass(ICorrelationContextAccessor correlationContext)
     {
-        private readonly ICorrelationContextAccessor _correlationContext;
-
-        public TransientClass(ICorrelationContextAccessor correlationContext)
-        {
-            _correlationContext = correlationContext;
-        }
-
-        public string GetCorrelationFromScoped => _correlationContext.CorrelationContext.CorrelationId;
+        public string GetCorrelationFromScoped => correlationContext.CorrelationContext.CorrelationId;
     }
 
     private class TestCorrelationIdProvider : ICorrelationIdProvider

@@ -2,18 +2,11 @@
 
 namespace MvcSample;
 
-public class ServiceWhichUsesCorrelationContext
+public class ServiceWhichUsesCorrelationContext(ICorrelationContextAccessor correlationContextAccessor)
 {
-    private readonly ICorrelationContextAccessor _correlationContextAccessor;
-
-    public ServiceWhichUsesCorrelationContext(ICorrelationContextAccessor correlationContextAccessor)
-    {
-        _correlationContextAccessor = correlationContextAccessor;
-    }
-
     public string DoStuff()
     {
-        var correlationId = _correlationContextAccessor.CorrelationContext.CorrelationId;
+        var correlationId = correlationContextAccessor.CorrelationContext.CorrelationId;
 
         return $"Formatted correlation ID:{correlationId}";
     }
