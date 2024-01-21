@@ -1,6 +1,8 @@
 # Release Notes
 
-Packages are available on NuGet: [CorrelationId](https://www.nuget.org/packages/CorrelationId/).
+Packages are available on NuGet: [CorrelationId-ForkWithLogLevelSeverityOption](https://www.nuget.org/packages/CorrelationId-ForkWithLogLevelSeverityOption)
+
+Original Packages: [CorrelationId](https://www.nuget.org/packages/CorrelationId/).
 
 ## v5.0.*
 
