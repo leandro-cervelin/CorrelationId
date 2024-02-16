@@ -11,7 +11,7 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>aspnetcore;correlationid</PackageTags>
 		<NeutralLanguage>en</NeutralLanguage>
-		<Version>5.0.1</Version>
+		<Version>5.0.2</Version>
 		<DocumentationFile></DocumentationFile>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
